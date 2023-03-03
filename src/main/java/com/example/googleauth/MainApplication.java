@@ -1,11 +1,10 @@
 package com.example.googleauth;
 
+import static com.example.googleauth.Utils.getTOTPCode;
 import com.google.zxing.WriterException;
 
 import java.io.IOException;
 import java.util.Scanner;
-
-import static com.example.googleauth.Utils.getTOTPCode;
 
 public class MainApplication {
 
@@ -16,7 +15,8 @@ public class MainApplication {
         String barCodeUrl = Utils.getGoogleAuthenticatorBarCode(secretKey, email, companyName);
         System.out.println(barCodeUrl);
         Utils.createQRCode(barCodeUrl, "QRCode.png", 400, 400);
-
+        System.out.println("Scan QR from file QRCode.png with your OTP App.");
+        System.out.println("Then enter the OTP code :");
         Scanner scanner = new Scanner(System.in);
         String code = scanner.nextLine();
         if (code.equals(getTOTPCode(secretKey))) {
